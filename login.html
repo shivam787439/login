@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <br>
+    <form action="homepage.html" method="post" onsubmit="Valid(event);">
+        Email: <input type="text" name="email" id="email" onkeyup="Valid(event);"><span id="emailerr" style="color: red;"></span><br>
+        Password: <input type="password" name="pass" id="pass" onkeyup="Valid(event);" ><span id="passworderr" style="color: red;"></span><br>        
+        <input type="submit" value="Login">
+        <input type="reset" value="Reset"><a href="registration.html">Registration</a>
+    </form>
+    <script>
+        function Valid(event){            
+            var regeml = /^[a-zA-Z0-9]{2,}@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
+            var resulteml = regeml.test(document.getElementById("email").value);
+            if(document.getElementById("email").value == ""){
+                event.preventDefault();
+                document.getElementById("emailerr").innerHTML = "Email field is required.";
+            }else if(resulteml == false){
+                event.preventDefault();
+                document.getElementById("emailerr").innerHTML = "Email is invalid.";
+            }else{
+                document.getElementById("emailerr").innerHTML = "";
+            }
+
+            var regpwdalpha = /[a-zA-Z]/;
+            var resultpwdalpha = regpwdalpha.test(document.getElementById("pass").value);
+            var regpwddigit = /[0-9]/;
+            var resultpwddigit = regpwddigit.test(document.getElementById("pass").value);
+            var regpwdspecial = /[^a-zA-Z0-9]/;
+            var resultpwdspecial = regpwdspecial.test(document.getElementById("pass").value);
+
+            if(document.getElementById("pass").value == ''){
+                event.preventDefault();
+                document.getElementById("passworderr").innerHTML = "Password is required!!!";
+            }else if(resultpwdalpha == false){
+                event.preventDefault();
+                document.getElementById("passworderr").innerHTML = "Alphabet is required!!!";
+            }else if(resultpwddigit == false){
+                event.preventDefault();
+                document.getElementById("passworderr").innerHTML = "Number is required!!!";
+            }else if(resultpwdspecial == false){
+                event.preventDefault();
+                document.getElementById("passworderr").innerHTML = "Special Character is required!!!";
+            }else if(document.getElementById("pass").value.length < 8){
+                event.preventDefault();
+                document.getElementById("passworderr").innerHTML = "Minimum 8 length of password is required!!!";
+            }else{
+                document.getElementById("passworderr").innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>
